@@ -1,45 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import '@/app/globals.css';
 import React from 'react';
 
 export default function Footer() {
     return (
-        <footer className="container mx-auto px-8 border-t border-gray-400 mt-12 py-6 text-center sm:flex items-center justify-between">
-            <p>© 2025 GreatStack. All rights reserved.</p>
-            <ul className="flex items-center gap-6 justify-center mt-4 sm:mt-0">
-                <li>
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://github.com"
-                        aria-label="Visit our GitHub profile"
-                    >
-                        GitHub
-                    </a>
-                </li>
-                <li>
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://linkedin.com"
-                        aria-label="Visit our LinkedIn profile"
-                    >
-                        LinkedIn
-                    </a>
-                </li>
-                <li>
-                    <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="https://twitter.com"
-                        aria-label="Visit our Twitter profile"
-                    >
-                        Twitter
-                    </a>
-                </li>
-            </ul>
+        <footer className="w-full fixed bottom-0 left-0 right-0 z-10 bg-transparent">
+            <div className="w-full mx-auto max-w-screen-xl p-4 text-center">
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                    © 2025 <Link href=" " className="hover:underline">David.wealth™</Link>. All Rights Reserved.
+                </div>
+                <div className="flex justify-center items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <Link href="#" className="hover:underline">About</Link>
+                    <span className="mx-2">|</span>
+                    <Link href="#" className="hover:underline">Privacy Policy</Link>
+                    <span className="mx-2">|</span>
+                    <Link href="#" className="hover:underline">Licensing</Link>
+                    <span className="mx-2">|</span>
+                    <Link href="#" className="hover:underline">Contact</Link>
+                </div>
+            </div>
         </footer>
     );
 }
