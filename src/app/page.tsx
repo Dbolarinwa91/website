@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import dynamic from 'next/dynamic';
-
-// Optimized imports
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import profilePic from "@/public/profile.png";
@@ -22,58 +19,12 @@ const Spline = dynamic(() => import('@splinetool/react-spline'), {
 });
 
 export default function Home() {
-  const contentRef = useRef(null);
-  const [splineLoaded, setSplineLoaded] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   
   useEffect(() => {
     setIsMounted(true);
     return () => setIsMounted(false);
   }, []);
-
-  // Memoized animation variants to prevent unnecessary recalculations
-  const animations = useMemo(() => ({
-    // Page transition animation
-    pageTransition: {
-      hidden: { opacity: 0 },
-      visible: { 
-        opacity: 1,
-        transition: { 
-          duration: 1.5, 
-          ease: [0.22, 1, 0.36, 1],
-          staggerChildren: 0.15
-        }
-      },
-      exit: { 
-        opacity: 0,
-        transition: { 
-          duration: 1.2, 
-          ease: [0.65, 0, 0.35, 1] 
-        }
-      }
-    },
-    
-    // Staggered child animations
-    contentItems: {
-      hidden: { opacity: 0, y: 10 },
-      visible: { 
-        opacity: 1, 
-        y: 0,
-        transition: { 
-          duration: 1, 
-          ease: [0.25, 0.1, 0.25, 1] 
-        }
-      },
-      exit: { 
-        opacity: 0, 
-        y: -10,
-        transition: { 
-          duration: 0.8, 
-          ease: [0.65, 0, 0.35, 1] 
-        }
-      }
-    }
-  }), []);
 
   // Memoized typewriter options
   const typewriterOptions = useMemo(() => ({
@@ -91,30 +42,23 @@ export default function Home() {
   }), []);
 
   return (
-    <AnimatePresence mode="wait">
+    <>
       {isMounted && (
-        <motion.div 
-          className="relative w-full h-screen overflow-hidden"
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-          variants={animations.pageTransition}
-        >
+        <div className="relative w-full h-screen overflow-hidden">
           {/* Full screen Spline animation in background */}
           <div className="absolute inset-0 w-full h-full z-0">
             <Spline
               scene="https://prod.spline.design/cbkJOh7Eaiem1llK/scene.splinecode"
               className="absolute inset-0 w-full h-full"
-              onLoad={() => setSplineLoaded(true)}
             />
           </div>
 
           {/* Overlay UI Elements */}
           <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
             {/* Header */}
-            <motion.div variants={animations.contentItems} className="pointer-events-auto">
+            <div className="pointer-events-auto">
               <Header />
-            </motion.div>
+            </div>
 
             {/* Main Content */}
             <div className="flex flex-col md:flex-row w-full h-screen pt-16">
@@ -122,78 +66,57 @@ export default function Home() {
               <div className="hidden md:block md:w-[78%]"></div>
               
               {/* Right side - Profile Picture & Welcome Text */}
-              <motion.div 
-                ref={contentRef}
-                className="w-full md:w-[22%] flex flex-col items-center justify-center p-8 pr-4"
-                variants={animations.contentItems}
-              >
+              <div className="w-full md:w-[22%] flex flex-col items-center justify-center p-8 pr-4">
                 <div className="text-white text-center md:text-right backdrop-blur-none p-6 pr-0 rounded-lg pointer-events-auto">
                   {/* Profile Picture */}
-                  <motion.div 
-                    className="flex justify-center md:justify-end mb-6"
-                    variants={animations.contentItems}
-                  >
+                  <div className="flex justify-center md:justify-end mb-6">
                     <div className="bg-black bg-opacity-30 rounded-full p-1 backdrop-blur-none">
                       <Image 
                         src={profilePic} 
                         alt="Profile Picture" 
-                        width={200} 
-                        height={200} 
+                        width={180} 
+                        height={180} 
                         className="rounded-full border-3 border-gray-800 shadow-lg"
                         priority={true}
                       />
                     </div>
-                  </motion.div>
+                  </div>
                   
                   {/* Text content */}
-                  <motion.div variants={animations.contentItems} className="text-shadow">
-                    <p className="text-lg font-medium bg-gradient-to-r from-black/40 to-transparent p-2 rounded inline-block backdrop-blur-none">
-                      Senior DevOps Engineer
-                    </p>
-                  </motion.div>
-
-                  <motion.div variants={animations.contentItems} className="my-2">
-                    <h1 className="text-3xl sm:text-5xl font-bold tracking-[-.02em] mb-4 text-shadow-lg">
-                      Hello there,
-                    </h1>
-                  </motion.div>
-
-                  <motion.div 
-                    className="text-xl font-semibold text-blue-400 bg-black/30 p-2 rounded backdrop-blur-none inline-block"
-                    variants={animations.contentItems}
-                  >
+                  <h1 className="text-3xl sm:text-2xl font-bold tracking-[-.02em] mb-4 text-shadow-lg">
+                    Hello there 👋, <br></br>I'm David Wealth
+                  </h1>
+              
+                  <div className="text-xl font-semibold text-blue-400 bg-black/30 p-2 rounded backdrop-blur-none inline-block">
                     <Typewriter options={typewriterOptions} />
-                  </motion.div>
+                  </div>
 
                   {/* Social Media Card */}
-                  <motion.div 
-                    variants={animations.contentItems} 
-                    className="mt-4 flex justify-center md:justify-end pointer-events-auto"
-                  >
+                  <div className="mt-4 flex justify-center md:justify-end pointer-events-auto">
                     <SocialCard />
-                  </motion.div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Footer */}
-            <motion.div variants={animations.contentItems} className="pointer-events-auto">
+            <div className="pointer-events-auto">
               <Footer />
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
 
-// Extracted Social Card component for better code organization
+// Extracted Social Card component
 function SocialCard() {
   return (
     <div className="card">
       <div className="background"></div>
       <div className="logo">
-        <div className="logo-text">DW</div>
+        <div className="logo-text"><span>DW</span></div>
       </div>
       <div className="box box1">
         <span className="icon">
@@ -228,7 +151,6 @@ function SocialCard() {
           overflow: hidden;
           box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
           transition: all 1s ease-in-out;
-          will-change: transform;
         }
         .background {
           position: absolute;
@@ -271,7 +193,6 @@ function SocialCard() {
           box-shadow: rgba(100, 100, 111, 0.364) -7px 7px 29px 0px;
           transform-origin: bottom left;
           transition: all 1s ease-in-out;
-          will-change: transform, opacity;
         }
         .box::before {
           content: "";

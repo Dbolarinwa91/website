@@ -15,7 +15,6 @@ import {
   Monitor
 } from 'lucide-react';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { useRouter } from 'next/navigation';
 
 const ProjectsPage = () => {
@@ -250,9 +249,9 @@ const ProjectsPage = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen relative bg-gray-900">
       <Header />
-      <div className="min-h-screen bg-gray-900 text-gray-100 overflow-x-hidden">
+      <main className="flex-grow bg-gray-900 text-gray-100 overflow-x-hidden pb-0">
         {/* Animated Particle Background */}
         <div className="fixed inset-0 z-0 opacity-50">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-700 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -270,13 +269,21 @@ const ProjectsPage = () => {
         ></div>
 
         {/* Hero Section with Glassmorphism */}
-        <div className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0) 70%)`,
+              transition: 'background 0.3s ease'
+            }}
+          ></div>
           <div className="relative z-10 max-w-6xl mx-auto px-4 py-24 sm:px-6 lg:px-8 flex flex-col items-center text-center">
             <div
-              className="inline-block backdrop-blur-xl bg-white/10 px-6 py-2 rounded-full text-sm font-medium mb-6 border border-white/20 shadow-xl animate-float"
+              className="inline-block backdrop-blur-xl bg-white/10 px-6 py-2 rounded-full text-sm font-medium mb-6 border border-white/20 shadow-xl animate-float group relative"
               style={getParallaxStyle(10)}
             >
-              ENTERPRISE PROJECTS PORTFOLIO
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg blur opacity-0 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse-slow"></div>
+              <span className="relative z-10">ENTERPRISE PROJECTS PORTFOLIO</span>
             </div>
 
             <h1
@@ -298,6 +305,13 @@ const ProjectsPage = () => {
             >
               A showcase of enterprise infrastructure and DevOps projects that delivered measurable business value and technical excellence.
             </p>
+
+            <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+              <p className="text-gray-400 mb-3 text-lg">Scroll to explore</p>
+              <div className="w-4 h-7 border-2 border-gray-400 rounded-full flex justify-center p-1">
+                <div className="w-2 h-3 bg-blue-400 rounded-full animate-bounce-slow"></div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -485,7 +499,7 @@ const ProjectsPage = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="relative z-10 py-24 bg-black">
+        <div className="relative z-10 py-24 bg-black mb-0">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
               className="relative rounded-2xl overflow-hidden p-0.5 opacity-0 transform translate-y-10 transition duration-1000 ease-out"
@@ -534,50 +548,64 @@ const ProjectsPage = () => {
             mixBlendMode: 'difference'
           }}
         ></div>
+      </main>
 
-        {/* CSS for animations */}
-        <style jsx>{`
-          .animate-float { animation: float 6s ease-in-out infinite; }
-          .animate-gradient { animation: gradient 8s linear infinite; }
-          .animate-gradient-xy { animation: gradient-xy 15s linear infinite; }
-          .animate-blob { animation: blob 7s infinite; }
-          .animate-bounce-slow { animation: bounce 2s infinite; }
-          .animate-pulse-slow { animation: pulse 3s infinite; }
-          .animation-delay-2000 { animation-delay: 2s; }
-          .animation-delay-4000 { animation-delay: 4s; }
-          
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-          }
-          @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          @keyframes gradient-xy {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-          }
-          @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-          }
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-          }
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-          }
-        `}</style>
-      </div>
-      <Footer />
-    </>
+      {/* Footer with consistent styling to avoid white gaps */}
+      <footer className="relative w-full bg-gray-900 z-10 mt-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center">
+            <p className="text-gray-500 text-sm">© 2025 David wealth™. All Rights Reserved.</p>
+            <div className="mt-4 space-x-4">
+              <a href="/about" className="text-gray-400 hover:text-blue-400 text-sm">About</a> | 
+              <a href="/privacy" className="text-gray-400 hover:text-blue-400 text-sm">Privacy Policy</a> | 
+              <a href="/licensing" className="text-gray-400 hover:text-blue-400 text-sm">Licensing</a> | 
+              <a href="/contact" className="text-gray-400 hover:text-blue-400 text-sm">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* CSS for animations */}
+      <style jsx>{`
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-gradient { animation: gradient 8s linear infinite; }
+        .animate-gradient-xy { animation: gradient-xy 15s linear infinite; }
+        .animate-blob { animation: blob 7s infinite; }
+        .animate-bounce-slow { animation: bounce 2s infinite; }
+        .animate-pulse-slow { animation: pulse 3s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes gradient-xy {
+          0% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
+          100% { background-position: 0% 0%; }
+        }
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(5px); }
+        }
+      `}</style>
+    </div>
   );
 };
 

@@ -1,22 +1,28 @@
 "use client";
+import { BsCloudCheck } from 'react-icons/bs';
 import React, { useState, useEffect } from 'react';
 import { 
-  Cloud, 
   Server, 
   Shield, 
   Database, 
-  Globe,
   ArrowRight,
   CheckCircle,
   FileCode,
   Cpu,
   DollarSign,
-  BarChart3,
-  Award
+  BarChart3
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useRouter } from 'next/navigation';
+
+// Import cloud provider icons from react-icons
+import { 
+  SiAmazonwebservices, 
+  SiMicrosoftazure,
+  SiGooglecloud 
+} from 'react-icons/si';
+import { FaMicrosoft } from 'react-icons/fa';
 
 const CloudServicePage = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -82,11 +88,11 @@ const CloudServicePage = () => {
     };
   }, []);
 
-  // Cloud providers data
+  // Cloud providers data with updated icons
   const cloudProviders = {
     aws: {
       name: "Amazon Web Services",
-      icon: <Cloud className="h-12 w-12" />,
+      icon: <SiAmazonwebservices className="h-12 w-12" />,
       color: "from-orange-400 to-orange-600",
       documentationUrl: "https://docs.aws.amazon.com/",
       services: [
@@ -124,7 +130,7 @@ const CloudServicePage = () => {
     },
     azure: {
       name: "Microsoft Azure",
-      icon: <Cloud className="h-12 w-12" />,
+      icon: <FaMicrosoft className="h-12 w-12" />,
       color: "from-blue-400 to-blue-600",
       documentationUrl: "https://docs.microsoft.com/azure/",
       services: [
@@ -157,7 +163,7 @@ const CloudServicePage = () => {
     },
     gcp: {
       name: "Google Cloud Platform",
-      icon: <Cloud className="h-12 w-12" />,
+      icon: <SiGooglecloud className="h-12 w-12" />,
       color: "from-red-400 to-red-600",
       documentationUrl: "https://cloud.google.com/docs",
       services: [
@@ -195,7 +201,7 @@ const CloudServicePage = () => {
     },
     hybrid: {
       name: "Hybrid Cloud",
-      icon: <Globe className="h-12 w-12" />,
+      icon: <BsCloudCheck className="h-12 w-12" />,
       color: "from-purple-400 to-purple-600",
       documentationUrl: "https://azure.microsoft.com/solutions/hybrid-cloud/",
       services: [
@@ -228,7 +234,7 @@ const CloudServicePage = () => {
     }
   };
 
-  // Certifications data
+  // Certifications data with updated icons
   const certifications = [
     {
       name: "AWS Certified Solutions Architect – Professional",
@@ -236,7 +242,7 @@ const CloudServicePage = () => {
       validUntil: "Nov 2026",
       credentialId: "QS1ZPZ0C8JF4QNCZ",
       skills: ["Multi-Account Architecture", "Hybrid Connectivity", "Distributed Systems Design", "Cost Optimization", "Serverless Architecture"],
-      icon: <Award className="h-6 w-6" />,
+      icon: <SiAmazonwebservices className="h-6 w-6" />,
       color: "bg-orange-500",
       level: "Professional"
     },
@@ -246,7 +252,7 @@ const CloudServicePage = () => {
       validUntil: "Nov 2026",
       credentialId: "AWS-ASA-1234567",
       skills: ["Amazon S3", "Amazon RDS", "Cloud Architecture", "EC2", "VPC"],
-      icon: <Award className="h-6 w-6" />,
+      icon: <SiAmazonwebservices className="h-6 w-6" />,
       color: "bg-orange-400",
       level: "Associate"
     },
@@ -256,7 +262,7 @@ const CloudServicePage = () => {
       validUntil: "Issued: July 2023",
       credentialId: "MSFT-AZ305-12345",
       skills: ["Authentication & Authorization", "Governance", "Migration", "Infrastructure Design", "Networking"],
-      icon: <Award className="h-6 w-6" />,
+      icon: <FaMicrosoft className="h-6 w-6" />,
       color: "bg-blue-500",
       level: "Professional"
     },
@@ -266,7 +272,7 @@ const CloudServicePage = () => {
       validUntil: "Issued: July 2023",
       credentialId: "1A542F723591121B",
       skills: ["DevOps", "Linux", "Azure Fundamentals", "Cloud Concepts", "Security"],
-      icon: <Award className="h-6 w-6" />,
+      icon: <FaMicrosoft className="h-6 w-6" />,
       color: "bg-blue-400",
       level: "Fundamentals"
     },
@@ -276,13 +282,13 @@ const CloudServicePage = () => {
       validUntil: "Issued: March 2024",
       credentialId: "GCP-PCA-98765",
       skills: ["System Design", "Security", "Compliance", "GKE", "BigQuery"],
-      icon: <Award className="h-6 w-6" />,
+      icon: <SiGooglecloud className="h-6 w-6" />,
       color: "bg-red-500",
       level: "Professional"
     }
   ];
 
-  // Cloud strategies data
+  // Cloud strategies data with updated documentation links
   const cloudStrategies = [
     {
       title: "Cost Optimization",
@@ -293,7 +299,7 @@ const CloudServicePage = () => {
     {
       title: "Multi-Cloud Architecture",
       description: "Design resilient systems across multiple cloud providers to eliminate vendor lock-in and enhance availability",
-      icon: <Globe className="h-8 w-8" />,
+      icon: <BsCloudCheck className="h-8 w-8" />,
       color: "bg-blue-500"
     },
     {
@@ -632,7 +638,7 @@ const CloudServicePage = () => {
                       
                       <div className="mt-auto pt-4 border-t border-gray-700">
                         <a 
-                          href="#" 
+                          href="/Documentation" 
                           className="flex items-center text-blue-400 text-sm group-hover:text-blue-300 transition-colors duration-300"
                         >
                           <span>View documentation</span>
@@ -698,7 +704,7 @@ const CloudServicePage = () => {
                             <Server className="h-10 w-10 text-blue-400" />
                           </div>
                           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-                            <Cloud className="h-10 w-10 text-indigo-400" />
+                            <SiAmazonwebservices className="h-10 w-10 text-orange-400" />
                           </div>
                           <div className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2">
                             <Database className="h-10 w-10 text-purple-400" />

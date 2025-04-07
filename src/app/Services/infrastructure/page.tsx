@@ -4,18 +4,24 @@ import {
   Server, 
   ArrowRight,
   CheckCircle2,
-  Code,
-  CloudCog,
-  Layers,
-  Boxes,
-  Workflow,
-  Gauge,
+  Clock,
   Shield,
-  Clock
+  Gauge
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useRouter } from 'next/navigation';
+
+// Import icons from react-icons
+import { 
+  SiTerraform, 
+  SiAmazonwebservices, 
+  SiAnsible, 
+  SiDocker, 
+  SiKubernetes, 
+  SiJenkins,
+  SiGithubactions 
+} from "react-icons/si";
 
 const InfrastructureServicePage = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -80,47 +86,53 @@ const InfrastructureServicePage = () => {
     };
   }, []);
 
-  // Infrastructure tools data
+  // Infrastructure tools data with proper icons
   const infrastructureTools = [
     {
       name: "Terraform",
       description: "Infrastructure as Code for consistent, repeatable deployments across all environments",
-      icon: <Code className="h-6 w-6" />,
+      icon: <SiTerraform className="h-6 w-6" />,
       color: "bg-purple-500"
     },
     {
       name: "AWS CloudFormation",
       description: "Template-based infrastructure management for AWS resources",
-      icon: <Layers className="h-6 w-6" />,
+      icon: <SiAmazonwebservices className="h-6 w-6" />,
       color: "bg-orange-500"
     },
     {
       name: "Ansible",
       description: "Automation for configuration management, application deployment, and orchestration",
-      icon: <Workflow className="h-6 w-6" />,
+      icon: <SiAnsible className="h-6 w-6" />,
       color: "bg-red-500"
     },
     {
       name: "Docker",
       description: "Containerization for application packaging and consistent deployment",
-      icon: <Boxes className="h-6 w-6" />,
+      icon: <SiDocker className="h-6 w-6" />,
       color: "bg-blue-500"
     },
     {
       name: "Kubernetes",
       description: "Container orchestration for scalable, resilient application deployments",
-      icon: <CloudCog className="h-6 w-6" />,
+      icon: <SiKubernetes className="h-6 w-6" />,
       color: "bg-cyan-500"
     },
     {
       name: "Jenkins",
       description: "CI/CD automation server for reliable deployment pipelines",
-      icon: <Gauge className="h-6 w-6" />,
+      icon: <SiJenkins className="h-6 w-6" />,
       color: "bg-indigo-500"
+    },
+    {
+      name: "GitHub Actions",
+      description: "CI/CD workflows integrated directly with GitHub repositories",
+      icon: <SiGithubactions className="h-6 w-6" />,
+      color: "bg-blue-700"
     }
   ];
 
-  // Cloud provider data
+  // Cloud provider data updated to include GCP
   const cloudProviders = [
     {
       name: "Amazon Web Services (AWS)",
@@ -133,6 +145,12 @@ const InfrastructureServicePage = () => {
       services: ["Virtual Machines", "Blob Storage", "Azure AD", "App Service", "AKS"],
       expertise: "Intermediate",
       color: "from-blue-500 to-cyan-600"
+    },
+    {
+      name: "Google Cloud Platform (GCP)",
+      services: ["Compute Engine", "Cloud Storage", "Cloud Functions", "BigQuery", "Kubernetes Engine"],
+      expertise: "Intermediate",
+      color: "from-green-500 to-teal-600"
     }
   ];
 
@@ -304,7 +322,7 @@ const InfrastructureServicePage = () => {
           </div>
         </div>
 
-        {/* Cloud Providers Section */}
+        {/* Cloud Certifications Section (updated from Cloud Expertise) */}
         <div className="relative z-10 py-20 bg-gray-900">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
@@ -315,14 +333,14 @@ const InfrastructureServicePage = () => {
               }}
             >
               <h2 className="text-3xl sm:text-5xl font-bold text-white">
-                Cloud <span className="text-blue-400">Expertise</span>
+                Cloud <span className="text-blue-400">Certifications</span>
               </h2>
               <p className="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">
                 Certified experience with leading cloud platforms
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cloudProviders.map((provider, index) => (
                 <div
                   key={index}
@@ -377,6 +395,21 @@ const InfrastructureServicePage = () => {
                             <div className="ml-4">
                               <h4 className="font-bold text-white">Microsoft Certified: Azure Fundamentals</h4>
                               <p className="text-sm text-gray-400">Issued: July 2023</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Add certification badge for GCP */}
+                      {provider.name.includes("Google") && (
+                        <div className="mt-6 p-4 bg-gray-900/50 rounded-lg border border-gray-700">
+                          <div className="flex items-center">
+                            <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
+                              <CheckCircle2 className="h-6 w-6 text-green-400" />
+                            </div>
+                            <div className="ml-4">
+                              <h4 className="font-bold text-white">Google Cloud Certified: Associate Cloud Engineer</h4>
+                              <p className="text-sm text-gray-400">Issued: March 2024</p>
                             </div>
                           </div>
                         </div>

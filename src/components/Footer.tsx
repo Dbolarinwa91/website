@@ -10,15 +10,18 @@ export default function Footer() {
                 <div className="text-sm text-gray-500 dark:text-gray-400">
                     © 2025 <Link href=" " className="hover:underline">David.wealth™</Link>. All Rights Reserved.
                 </div>
-                <div className="flex justify-center items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400">
-                    <Link href="#" className="hover:underline">About</Link>
-                    <span className="mx-2">|</span>
-                    <Link href="#" className="hover:underline">Privacy Policy</Link>
-                    <span className="mx-2">|</span>
-                    <Link href="#" className="hover:underline">Licensing</Link>
-                    <span className="mx-2">|</span>
-                    <Link href="#" className="hover:underline">Contact</Link>
-                </div>
+                <div className="text-center">
+    
+     <div className="mt-4 space-x-4">
+       <a href="/about" className="text-gray-400 hover:text-blue-400 text-sm">  About </a> 
+       <span className="mx-3 text-gray-500">|</span>
+       <a href="/privacy" className="text-gray-400 hover:text-blue-400 text-sm">  Privacy Policy </a> 
+       <span className="mx-3 text-gray-500">|</span>
+       <a href="/licensing" className="text-gray-400 hover:text-blue-400 text-sm"> Licensing  </a> 
+       <span className="mx-3 text-gray-500">|</span>
+       <a href="/contact" className="text-gray-400 hover:text-blue-400 text-sm">Contact</a>
+     </div>
+            </div>
             </div>
         </footer>
     );

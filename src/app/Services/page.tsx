@@ -14,14 +14,14 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useRouter } from 'next/navigation'; // Import useRouter hook
+import { useRouter } from 'next/navigation';
 
 const ModernUIServicePage = () => {
   const [activeService, setActiveService] = useState('infrastructure');
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
 
   // Navigation function for buttons
   const navigateToPath = (path: string) => {
@@ -125,9 +125,12 @@ const ModernUIServicePage = () => {
   };
 
   return (
-    <>
+    // Wrapper div with proper structure to prevent fixed footer issues
+    <div className="flex flex-col min-h-screen relative bg-gray-900">
       <Header />
-      <div className="min-h-screen bg-gray-900 text-gray-100 overflow-x-hidden">
+      
+      {/* Main content area with flex-grow to push footer down */}
+      <main className="flex-grow bg-gray-900 text-gray-100 overflow-x-hidden pb-0">
         {/* Animated Particle Background */}
         <div className="fixed inset-0 z-0 opacity-50">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-700 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -290,46 +293,67 @@ const ModernUIServicePage = () => {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center justify-items-center">
+              {/* Animation Container - Fixed for proper alignment */}
               <div
-                className="relative h-96 opacity-0 transform translate-x-10 transition duration-1000 ease-out"
+                className="relative h-96 opacity-0 transform translate-x-10 transition duration-1000 ease-out flex items-center justify-center"
                 style={{
                   opacity: scrollY > 1100 ? 1 : 0,
                   transform: scrollY > 1100 ? 'translateX(0)' : 'translateX(10px)'
                 }}
               >
-                <div className="absolute inset-0">
-                  <div className="relative h-full w-full">
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-                      <div className="h-20 w-20 rounded-2xl bg-blue-500 flex items-center justify-center shadow-lg animate-pulse-slow">
-                        <Server className="h-10 w-10 text-white" />
+                {/* Center point container */}
+                <div className="flex items-center justify-center h-full w-full">
+                  {/* Orbital system container */}
+                  <div className="relative" style={{ width: '360px', height: '360px' }}>
+                    {/* Background pulsing circle */}
+                    <div className="absolute inset-0 bg-blue-500 rounded-full opacity-10 animate-pulse-slow"></div>
+                    
+                    {/* Central server icon */}
+                    <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                      <div className="h-24 w-24 rounded-2xl bg-blue-500 flex items-center justify-center shadow-lg animate-pulse-slow">
+                        <Server className="h-12 w-12 text-white" />
                       </div>
                     </div>
-
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-64 w-64 animate-spin-slow">
+                    
+                    {/* Spinning orbit container */}
+                    <div 
+                      className="absolute left-1/2 top-1/2 animate-spin-slow"
+                      style={{ 
+                        width: '306px',
+                        height: '306px',
+                        transformOrigin: 'center center',
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    >
+                      {/* Top icon */}
                       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <div className="h-12 w-12 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg">
-                          <Code className="h-6 w-6 text-white" />
+                        <div className="h-14 w-14 rounded-xl bg-purple-500 flex items-center justify-center shadow-lg">
+                          <Code className="h-7 w-7 text-white" />
                         </div>
                       </div>
+                      
+                      {/* Bottom icon */}
                       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-                        <div className="h-12 w-12 rounded-xl bg-green-500 flex items-center justify-center shadow-lg">
-                          <Shield className="h-6 w-6 text-white" />
+                        <div className="h-14 w-14 rounded-xl bg-green-500 flex items-center justify-center shadow-lg">
+                          <Shield className="h-7 w-7 text-white" />
                         </div>
                       </div>
+                      
+                      {/* Left icon */}
                       <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <div className="h-12 w-12 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg">
-                          <Clock className="h-6 w-6 text-white" />
+                        <div className="h-14 w-14 rounded-xl bg-cyan-500 flex items-center justify-center shadow-lg">
+                          <Clock className="h-7 w-7 text-white" />
                         </div>
                       </div>
+                      
+                      {/* Right icon */}
                       <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2">
-                        <div className="h-12 w-12 rounded-xl bg-amber-500 flex items-center justify-center shadow-lg">
-                          <Zap className="h-6 w-6 text-white" />
+                        <div className="h-14 w-14 rounded-xl bg-amber-500 flex items-center justify-center shadow-lg">
+                          <Zap className="h-7 w-7 text-white" />
                         </div>
                       </div>
                     </div>
-
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-72 w-72 bg-blue-500 rounded-full opacity-10 animate-pulse-slow"></div>
                   </div>
                 </div>
               </div>
@@ -402,7 +426,6 @@ const ModernUIServicePage = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
-                
                 {
                   name: "Sarah Johnson",
                   role: "CTO, TechCorp",
@@ -420,7 +443,7 @@ const ModernUIServicePage = () => {
                 {
                   name: "Aisha Campbell",
                   role: "Director of Infrastructure, Dominion Systems Inc.",
-                  quote: "David’s mentorship and standardized Terraform modules completely transformed our infrastructure workflow. His CI/CD optimization using Jenkins and Kubernetes cut release times by over 70% while significantly increasing system uptime.",
+                  quote: "David's mentorship and standardized Terraform modules completely transformed our infrastructure workflow. His CI/CD optimization using Jenkins and Kubernetes cut release times by over 70% while significantly increasing system uptime.",
                   color: "from-teal-600 to-emerald-600",
                   delay: 400
                 },
@@ -434,14 +457,14 @@ const ModernUIServicePage = () => {
                 {
                   name: "Linda Okafor",
                   role: "Engineering Manager, FinEdge",
-                  quote: "David doesn’t just write infrastructure—he architects long-term solutions. His leadership on our DevSecOps pipeline helped us pass audits with zero critical findings.",
+                  quote: "David doesn't just write infrastructure—he architects long-term solutions. His leadership on our DevSecOps pipeline helped us pass audits with zero critical findings.",
                   color: "from-green-600 to-lime-600",
                   delay: 800
                 },
                 {
                   name: "Carlos Mendes",
                   role: "Cloud Architect, ByteScale",
-                  quote: "What impressed me most was David’s deep understanding of both the technical stack and business needs. His work improved system resilience and saved our team hundreds of engineering hours.",
+                  quote: "What impressed me most was David's deep understanding of both the technical stack and business needs. His work improved system resilience and saved our team hundreds of engineering hours.",
                   color: "from-cyan-600 to-sky-600",
                   delay: 1000
                 }
@@ -475,8 +498,8 @@ const ModernUIServicePage = () => {
           </div>
         </div>
 
-        {/* CTA Section with Animated Border */}
-        <div className="relative z-10 py-24 bg-black">
+        {/* CTA Section with Animated Border - connect directly to footer */}
+        <div className="relative z-10 py-24 bg-black mb-0">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div
               className="relative rounded-2xl overflow-hidden p-0.5 opacity-0 transform translate-y-10 transition duration-1000 ease-out"
@@ -527,59 +550,76 @@ const ModernUIServicePage = () => {
             mixBlendMode: 'difference'
           }}
         ></div>
+      </main>
 
-        {/* CSS for animations */}
-        <style jsx>{`
-          .animate-float { animation: float 6s ease-in-out infinite; }
-          .animate-gradient { animation: gradient 8s linear infinite; }
-          .animate-gradient-xy { animation: gradient-xy 15s linear infinite; }
-          .animate-blob { animation: blob 7s infinite; }
-          .animate-bounce-slow { animation: bounce 2s infinite; }
-          .animate-pulse-slow { animation: pulse 3s infinite; }
-          .animate-spin-slow { animation: spin 30s linear infinite; }
-          .perspective { perspective: 1000px; }
-          .preserve-3d { transform-style: preserve-3d; }
-          .backface-hidden { backface-visibility: hidden; }
-          .my-rotate-y-180 { transform: rotateY(180deg); }
-          .animation-delay-2000 { animation-delay: 2s; }
-          .animation-delay-4000 { animation-delay: 4s; }
-          
-          @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-          }
-          @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-          }
-          @keyframes gradient-xy {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-          }
-          @keyframes blob {
-            0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-            100% { transform: translate(0px, 0px) scale(1); }
-          }
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-          }
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
-          }
-          @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-          }
-        `}</style>
-      </div>
-      <Footer />
-    </>
+      {/* Footer with specific styling to ensure it's not fixed - no extra spacing div needed */}
+      <footer className="relative w-full bg-gray-900 z-10 mt-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center">
+            <p className="text-gray-500 text-sm">© 2025 David wealth™. All Rights Reserved.</p>
+            <div className="mt-4 space-x-4">
+              <a href="/about" className="text-gray-400 hover:text-blue-400 text-sm">  About </a> 
+              <span className="mx-3 text-gray-500">|</span>
+              <a href="/privacy" className="text-gray-400 hover:text-blue-400 text-sm">  Privacy Policy </a> 
+              <span className="mx-3 text-gray-500">|</span>
+              <a href="/licensing" className="text-gray-400 hover:text-blue-400 text-sm"> Licensing  </a> 
+              <span className="mx-3 text-gray-500">|</span>
+              <a href="/contact" className="text-gray-400 hover:text-blue-400 text-sm">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* CSS for animations */}
+      <style jsx>{`
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-gradient { animation: gradient 8s linear infinite; }
+        .animate-gradient-xy { animation: gradient-xy 15s linear infinite; }
+        .animate-blob { animation: blob 7s infinite; }
+        .animate-bounce-slow { animation: bounce 2s infinite; }
+        .animate-pulse-slow { animation: pulse 3s infinite; }
+        .animate-spin-slow { animation: spin 30s linear infinite; }
+        .perspective { perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .my-rotate-y-180 { transform: rotateY(180deg); }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes gradient-xy {
+          0% { background-position: 0% 0%; }
+          50% { background-position: 100% 100%; }
+          100% { background-position: 0% 0%; }
+        }
+        @keyframes blob {
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(5px); }
+        }
+        @keyframes spin {
+          0% { transform: translate(-50%, -50%) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+      `}</style>
+    </div>
   );
 };
 
