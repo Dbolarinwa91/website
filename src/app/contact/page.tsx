@@ -28,8 +28,8 @@ const ContactPage = () => {
     subject: '',
     message: ''
   });
-  const [errors, setErrors] = useState({});
-  const [hoveredCard, setHoveredCard] = useState(null);
+  const [errors, setErrors] = useState<Record<string, string | null>>({});
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   // Set window size on mount and resize
   useEffect(() => {
@@ -96,7 +96,7 @@ const ContactPage = () => {
     };
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -111,9 +111,9 @@ const ContactPage = () => {
       }));
     }
   };
-
+  
   const validateForm = () => {
-    const newErrors = {};
+    const newErrors: Record<string, string> = {};
     
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
@@ -137,7 +137,7 @@ const ContactPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -673,8 +673,8 @@ const ContactPage = () => {
   );
 };
 
-// Missing component import
-const Phone = ({ className }) => {
+// Phone component definition
+const Phone = ({ className }: { className?: string }) => {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 

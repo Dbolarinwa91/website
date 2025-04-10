@@ -721,7 +721,7 @@ const ConsultationPage = () => {
                   <Shield className="flex-shrink-0 h-6 w-6 text-blue-400 mr-3" />
                   <p className="text-blue-100 text-sm">
                     Your information is secure and will only be used to process your consultation request.
-                    We'll be in touch within 1 business day to schedule your consultation.
+                    We&apos;ll be in touch within 1 business day to schedule your consultation.
                   </p>
                 </div>
               </div>
@@ -834,7 +834,7 @@ const ConsultationPage = () => {
               Schedule Your DevOps Consultation
             </h1>
             <p className="text-gray-300 mt-4 max-w-2xl mx-auto">
-              Tell us about your infrastructure needs, and we'll show you how our solutions can transform your technology capabilities.
+              Tell us about your infrastructure needs, and we&apos;ll show you how our solutions can transform your technology capabilities.
             </p>
           </div>
           

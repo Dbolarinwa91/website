@@ -1,27 +1,60 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { 
-  GitBranch, 
+  // Removed unused imports: GitBranch, Code, Lock
   GitMerge,
   GitPullRequest,
   Server, 
   CloudCog,
-  Code,
   CheckCircle,
   BarChart3,
-  Lock,
   Rocket,
   ChevronRight,
   ArrowRight,
   History,
-  Clock,
+  Clock, // This is actually used in the component
   Zap,
   GanttChart
 } from 'lucide-react';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+// Removed unused import: Footer
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+
+interface ServicePackage {
+  title: string;
+  icon: React.ReactNode;
+  description: string;
+  features: string[];
+  cta: string;
+  color: string;
+  popular: boolean;
+}
+
+interface PipelineType {
+  title: string;
+  icon: React.ReactNode;
+  description: string;
+  benefits: string[];
+  color: string;
+  gradientBg: string;
+}
+
+interface CICDTool {
+  name: string;
+  logo: string;
+  description: string;
+  features: string[];
+  experience: string;
+}
+
+interface Testimonial {
+  name: string;
+  role: string;
+  quote: string;
+  color: string;
+  delay: number;
+}
 
 const CICDPage = () => {
   const [activeTab, setActiveTab] = useState('jenkins');
@@ -31,7 +64,7 @@ const CICDPage = () => {
   const router = useRouter();
 
   // Navigation function for buttons
-  const navigateToPath = (path) => {
+  const navigateToPath = (path: string) => {
     router.push(path);
   };
 
@@ -51,7 +84,7 @@ const CICDPage = () => {
 
   // Handle scroll position with throttling
   useEffect(() => {
-    let timeoutId = null;
+    let timeoutId: NodeJS.Timeout | null = null;
     const handleScroll = () => {
       if (!timeoutId) {
         timeoutId = setTimeout(() => {
@@ -70,8 +103,8 @@ const CICDPage = () => {
 
   // Handle mouse position with throttling
   useEffect(() => {
-    let timeoutId = null;
-    const handleMouseMove = (e) => {
+    let timeoutId: NodeJS.Timeout | null = null;
+    const handleMouseMove = (e: MouseEvent) => {
       if (!timeoutId) {
         timeoutId = setTimeout(() => {
           setMousePosition({ x: e.clientX, y: e.clientY });
@@ -101,7 +134,7 @@ const CICDPage = () => {
   };
 
   // Pipeline types with details
-  const pipelineTypes = [
+  const pipelineTypes: PipelineType[] = [
     {
       title: "Continuous Integration",
       icon: <GitMerge className="h-8 w-8" />,
@@ -157,7 +190,7 @@ const CICDPage = () => {
   ];
 
   // CI/CD tools with their features
-  const cicdTools = {
+  const cicdTools: Record<string, CICDTool> = {
     jenkins: {
       name: "Jenkins",
       logo: "/jenkins-logo.svg",
@@ -213,7 +246,7 @@ const CICDPage = () => {
   };
 
   // Service packages for the sales funnel
-  const servicePackages = [
+  const servicePackages: ServicePackage[] = [
     {
       title: "Pipeline Assessment",
       icon: <BarChart3 className="h-10 w-10 text-blue-400" />,
@@ -258,6 +291,38 @@ const CICDPage = () => {
       cta: "Transform Your Delivery",
       color: "from-emerald-600 to-green-600",
       popular: false
+    }
+  ];
+
+  // Testimonials data
+  const testimonials: Testimonial[] = [
+    {
+      name: "Michael Chen",
+      role: "VP Engineering, DataFlow",
+      quote: "Our deployment time went from 3 hours to 6 minutes. The reliability improvements alone paid for the entire project in the first quarter.",
+      color: "from-purple-600 to-pink-600",
+      delay: 0
+    },
+    {
+      name: "Sarah Johnson",
+      role: "CTO, TechCorp",
+      quote: "David's CI/CD pipeline automation reduced our AWS costs by 42% while improving performance 3x. A game-changer for our operations.",
+      color: "from-blue-600 to-indigo-600",
+      delay: 200
+    },
+    {
+      name: "Aisha Campbell",
+      role: "Director of Infrastructure, Dominion Systems Inc.",
+      quote: "The standardized Jenkins pipeline David implemented completely transformed our deployment workflow. We've cut release times by over 70% while significantly increasing system uptime.",
+      color: "from-emerald-600 to-green-600",
+      delay: 400
+    },
+    {
+      name: "James Peterson",
+      role: "SRE Lead, CloudNexus",
+      quote: "David&apos;s CI/CD expertise brought order to chaos during our AWS migration. His implementation ensured zero downtime during cutover and improved our compliance posture overnight.",
+      color: "from-amber-600 to-orange-600",
+      delay: 600
     }
   ];
 
@@ -473,7 +538,7 @@ const CICDPage = () => {
                       My Experience
                     </h4>
                     <p className="text-gray-300 italic">
-                      "{cicdTools[activeTab].experience}"
+                      &ldquo;{cicdTools[activeTab].experience}&rdquo;
                     </p>
                     
                     <div className="mt-6">
@@ -621,36 +686,7 @@ const CICDPage = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  name: "Michael Chen",
-                  role: "VP Engineering, DataFlow",
-                  quote: "Our deployment time went from 3 hours to 6 minutes. The reliability improvements alone paid for the entire project in the first quarter.",
-                  color: "from-purple-600 to-pink-600",
-                  delay: 0
-                },
-                {
-                  name: "Sarah Johnson",
-                  role: "CTO, TechCorp",
-                  quote: "David's CI/CD pipeline automation reduced our AWS costs by 42% while improving performance 3x. A game-changer for our operations.",
-                  color: "from-blue-600 to-indigo-600",
-                  delay: 200
-                },
-                {
-                  name: "Aisha Campbell",
-                  role: "Director of Infrastructure, Dominion Systems Inc.",
-                  quote: "The standardized Jenkins pipeline David implemented completely transformed our deployment workflow. We've cut release times by over 70% while significantly increasing system uptime.",
-                  color: "from-emerald-600 to-green-600",
-                  delay: 400
-                },
-                {
-                  name: "James Peterson",
-                  role: "SRE Lead, CloudNexus",
-                  quote: "David's CI/CD expertise brought order to chaos during our AWS migration. His implementation ensured zero downtime during cutover and improved our compliance posture overnight.",
-                  color: "from-amber-600 to-orange-600",
-                  delay: 600
-                }
-              ].map((testimonial, index) => (
+              {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
                   className="opacity-0 transform translate-y-10 transition duration-1000 ease-out"

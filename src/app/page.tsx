@@ -9,7 +9,7 @@ import profilePic from "@/public/profile.png";
 
 // Dynamically import heavy components with no SSR
 const Typewriter = dynamic(() => import('typewriter-effect'), { ssr: false });
-const Spline = dynamic(() => import('@splinetool/react-spline'), { 
+const Spline = dynamic(() => import('@/components/SplineWrapper'), { 
   ssr: false,
   loading: () => (
     <div className="absolute inset-0 flex items-center justify-center bg-black">
